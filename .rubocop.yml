@@ -1,24 +1,16 @@
 inherit_from:
+  - .rubocop_todo.yml
   - .rubocop.d/bundler.yml
   - .rubocop.d/gemspec.yml
   - .rubocop.d/layout.yml
   - .rubocop.d/lint.yml
   - .rubocop.d/metrics.yml
   - .rubocop.d/naming.yml
-  - .rubocop.d/performance.yml
   - .rubocop.d/rspec.yml
   - .rubocop.d/security.yml
   - .rubocop.d/style.yml
-  - .rubocop_todo.yml
-
-inherit_mode:
-  merge:
-    - Exclude
 
 require:
-  - rubocop-capybara
-  - rubocop-factory_bot
-  - rubocop-performance
   - rubocop-rake
   - rubocop-rspec
 
@@ -29,5 +21,35 @@ AllCops:
     - bin/**/*
     - vendor/**/*
     - spec/spec_helper.rb
-    - spec/support/rspec.rb
     - "*.gemspec"
+
+Bundler/GemComment:
+  Exclude:
+    - 'Gemfile'
+
+Naming/FileName:
+  Exclude:
+    - 'lib/cerise-gettext.rb'
+
+Naming/MethodParameterName:
+  AllowedNames:
+    - fs
+
+RSpec/ExampleLength:
+  Max: 7
+
+RSpec/SpecFilePathFormat:
+  CustomTransform:
+    "GetText": "gettext"
+
+RSpec/MessageChain:
+  Exclude:
+    - 'spec/cerise/gettext_spec.rb'
+
+RSpec/PendingWithoutReason:
+  Exclude:
+    - 'spec/cerise/gettext_spec.rb'
+
+Style/DisableCopsWithinSourceCodeDirective:
+  AllowedCops:
+    - Metrics/MethodLength

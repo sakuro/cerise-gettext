@@ -4,12 +4,12 @@ require_relative "lib/cerise/gettext/version"
 
 Gem::Specification.new do |spec|
   spec.name = "cerise-gettext"
-  spec.version = Cerise::Gettext::VERSION
+  spec.version = Cerise::GetText::VERSION
   spec.authors = ["OZAWA Sakuro"]
   spec.email = ["10973+sakuro@users.noreply.github.com"]
 
-  spec.summary = "cerise-gettext"
-  spec.description = "cerise-gettext"
+  spec.summary = "GetText for Hanami"
+  spec.description = "GetText integration for Hanami"
   spec.homepage = "https://github.com/sakuro/cerise-gettext"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.3.0"
@@ -36,4 +36,7 @@ Gem::Specification.new do |spec|
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+
+  spec.add_dependency "gettext", "~> 3.4"
+  spec.add_dependency "hanami-cli", "~> 2.1.0"
 end
