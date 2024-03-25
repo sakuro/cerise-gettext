@@ -11,17 +11,19 @@ RSpec.shared_context "in-app" do
   around do |example|
     fs.chdir(dir) do
       fs.mkdir("config")
-      fs.write("config/settings.rb", <<~FILE)
-        # frozen_string_literal: true
-
+      fs.write("config/app.rb", <<~APP_RB)
         module #{app_name}
-          class Settings < Hanami::Settings
-            # Define your app settings here, for example:
-            #
-            # setting :my_flag, default: false, constructor: Types::Params::Bool
+          class App < Hanami::App
           end
         end
-      FILE
+      APP_RB
+
+      fs.write("config/settings.rb", <<~SETTINGS_RB)
+        module #{app_name}
+          class Settings < Hanami::Settings
+          end
+        end
+      SETTINGS_RB
 
       example.run
     end
