@@ -29,12 +29,7 @@ module Cerise
     require_relative "gettext/version"
 
     require_relative "gettext/commands/install"
-
-    begin
-      require_relative "gettext/rake_tasks"
-    rescue NoMethodError
-      # this will fail during hanami install
-    end
+    require_relative "gettext/rake_tasks"
 
     Hanami::CLI.after "install", Commands::Install if Hanami::CLI.within_hanami_app?
   end
