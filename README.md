@@ -7,11 +7,12 @@ GetText support for [Hanami applications](https://github.com/hanami/hanami)
 Add this line to your application's Gemfile:
 
 ```rb
-gem "cerise-gettext", "~> VERSION"
-gem "cerise-gettext", "~> VERSION", group: :cli
+group :cli, :development, :production, :test do
+  gem "cerise-gettext"
+end
 ```
 
-(Make sure to specify same version constraint)
+(Make sure to include `:cli` group)
 
 ## Usage
 
