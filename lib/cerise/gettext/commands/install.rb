@@ -26,6 +26,7 @@ module Cerise
           append_gitignore
           append_settings
           append_envvars
+          append_middlewares
         end
 
         private def append_gitignore
@@ -47,6 +48,15 @@ module Cerise
               LOCALES=#{locales.join(":")}
             LOCALES
           end
+        end
+
+        private def append_middlewares
+          fs.inject_line_after_last("config/app.rb", "require", <<~REQUIRE)
+            require "locale/middleware"
+          REQUIRE
+          fs.inject_line_at_class_bottom("config/app.rb", "App", <<~MIDDLEWARE)
+            config.middleware.use Locale::Middleware
+          MIDDLEWARE
         end
 
         private def locales

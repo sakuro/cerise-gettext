@@ -12,6 +12,8 @@ RSpec.shared_context "in-app" do
     fs.chdir(dir) do
       fs.mkdir("config")
       fs.write("config/app.rb", <<~APP_RB)
+        require "hanami"
+
         module #{app_name}
           class App < Hanami::App
           end

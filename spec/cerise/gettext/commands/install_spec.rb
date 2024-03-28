@@ -44,5 +44,21 @@ RSpec.describe Cerise::GetText::Commands::Install, type: :cli do
         LOCALES=en:ja
       ENV
     end
+
+    it "adds require to config/app.rb" do
+      install.call(arbitrary_argument)
+
+      expect(fs.read("config/app.rb")).to include <<~APP
+        require "locale/middleware"
+      APP
+    end
+
+    it "adds middleware line config/app.rb" do
+      install.call(arbitrary_argument)
+
+      expect(fs.read("config/app.rb")).to include <<~APP
+        config.middleware.use Locale::Middleware
+      APP
+    end
   end
 end
